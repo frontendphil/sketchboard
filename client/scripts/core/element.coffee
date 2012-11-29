@@ -60,3 +60,6 @@ class Element
 
     show: ->
         @dom.show()
+
+    rotate: (deg) ->
+        return

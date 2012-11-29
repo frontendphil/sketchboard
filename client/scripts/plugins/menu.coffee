@@ -1,4 +1,4 @@
-class Menu extends AbstractElement
+class Menu extends UIObject
 
     constructor: (@attrs = {}) ->
         @processItems @attrs.items

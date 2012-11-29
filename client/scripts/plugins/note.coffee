@@ -1,4 +1,4 @@
-class Note extends AbstractElement
+class Note extends UIObject
 
     COLORS: ["yellow", "pink", "orange", "green", "blue", "white"]
     DEFAULT_COLOR: "yellow"
@@ -53,6 +53,9 @@ class Note extends AbstractElement
 
     showInfo: ->
         return
+
+    rotate: (deg) ->
+        @el.rotate deg
 
     showMenu: ->
         if not @overlay

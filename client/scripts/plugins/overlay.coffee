@@ -1,4 +1,4 @@
-class Overlay extends AbstractElement
+class Overlay extends UIObject
 
     constructor: (@facade, @slave, attrs = {}) ->
         width = @slave.getWidth() + (attrs.padding or 0)

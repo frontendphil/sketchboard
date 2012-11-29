@@ -1,4 +1,4 @@
-class MenuItem extends AbstractElement
+class MenuItem extends UIObject
 
     constructor: (attrs = {}) ->
         attrs.cls = attrs.cls or "x-menu-item"

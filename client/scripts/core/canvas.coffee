@@ -1,4 +1,4 @@
-class Canvas extends AbstractElement
+class Canvas extends UIObject
 
     constructor: ->
         super

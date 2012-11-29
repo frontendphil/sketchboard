@@ -1,4 +1,4 @@
-class NoteMenu extends AbstractElement
+class NoteMenu extends UIObject
 
     constructor: (@facade, @attr = {}) ->
         super
@@ -38,10 +38,29 @@ class NoteMenu extends AbstractElement
         notes = []
 
         $.each colors, (index, color) =>
-            notes.push new Note @facade,
+            note = new Note @facade,
                 thumbnail: true,
                 color: color,
                 style:
                     "margin-left": index + spacing + "px"
 
+            note.on "click", =>
+                @addNote(color)
+
+            notes.push note
+
         return notes
+
+    addNote: (color) ->
+        note = new Note @facade,
+            color: color
+            heading: "New Note"
+            content: "Your notes go here"
+
+        canvas = @facade.getCanvas()
+
+        canvas.add note
+
+        note.moveTo
+            x: canvas.getWidth() / 2 - note.getWidth() / 2
+            y: canvas.getHeight() / 2 - note.getHeight() / 2
