@@ -1,0 +1,43 @@
+@import "utils";
+
+@menu-width: 700px;
+@menu-height: 150px;
+
+.x-note-menu {
+    position: fixed;
+
+    right: 0;
+    top: 0;
+
+    .x-note-menu-notes {
+        height: @menu-height;
+        width: @menu-width;
+    }
+
+    .x-note-menu-help {
+        display: inline-block;
+
+        position: absolute;
+        bottom: -30px;
+
+        z-index: 99;
+
+        .margin(-20px, 0, -70px, 0);
+        .padding(12px, 5px, 15px, 15px);
+
+        background-color: #5b380f;
+
+        .rotate(15deg);
+        .shadow(20px, .42);
+
+        span {
+            display: inline;
+
+            .font("Reenie Beanie", serif, 30px);
+
+            text-shadow: 0 2px #000;
+
+            color: #fff;
+        }
+    }
+}

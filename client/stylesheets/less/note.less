@@ -1,0 +1,171 @@
+@import "utils";
+@import "const";
+
+@note-thumb-width: 100px;
+@note-thumb-height: 100px;
+
+.x-note-wrap {
+    position: absolute;
+
+    .x-note {
+        position: relative;
+
+        .shadow(5px, .2);
+
+        &:before {
+            .note-shadow(-3deg);
+        }
+
+        &:after {
+            .note-shadow(3deg);
+        }
+
+        .x-note-body {
+            color:#333;
+
+            height: 100%;
+
+            position: relative;
+
+            .font(@note-font, serif);
+            text-align: center;
+
+            z-index: 2;
+
+            h1 {
+                .padding(50px, 0px, 30px, 30px);
+
+                font-size:48px;
+                line-height:48px;
+                letter-spacing:-5px;
+
+                &:before {
+                    width:50%;
+                    height:40px;
+
+                    content:'';
+
+                    display:block;
+                    position:absolute;
+
+                    top:-20px;
+                    left:25%;
+
+                    background-color:rgba(255,255,255,.25);
+                    opacity:1;
+
+                    .rotate(-5deg);
+                    .shadow(2px, .15);
+                }
+            }
+
+            p {
+                min-width: 170px;
+
+                .padding(0px, 50px, 30px, 30px);
+
+                font-size:24px;
+                line-height:36px;
+                margin-top:20px;
+            }
+        }
+    }
+}
+
+.x-note-thumb {
+    .pointer();
+
+    &.x-note-wrap {
+        position: relative;
+        float: left;
+
+        margin-right: 20px;
+    }
+
+    .x-note {
+        &:before {
+            width: 80%;
+        }
+
+        &:after {
+            width: 80%;
+        }
+
+        .x-note-body {
+            width: @note-thumb-width;
+            height: @note-thumb-height;
+
+            p {
+                padding: 0;
+                min-width: 50px;
+            }
+
+            h1 {
+                padding: 0;
+
+                &:before {
+                    height: 20%;
+                    top: -10px;
+                }
+            }
+        }
+    }
+}
+
+/*
+    This adds the tape to the note
+*/
+.note-shadow(@rotation) {
+    width:90%;
+    height:20%;
+
+    content:'';
+
+    display:block;
+    position:absolute;
+
+    right:10px;
+    bottom:3px;
+
+    background-color:rgba(0,0,0,.5);
+
+    .rotate(@rotation);
+    .shadow(10px);
+
+    opacity:1;
+    z-index:1;
+}
+
+.note-background(@bg, @text, @gradient, @stop) {
+    background-color: @bg;
+
+    text-shadow: 0 1px 0 @text;
+
+    .gradient(@bg, @gradient, @stop);
+}
+/*
+    Here come the different colors for the sticky notes
+*/
+.x-note-color-yellow {
+    .note-background(#fe6f97, #fe6f97, #fe6f97, #f5da41);
+}
+
+.x-note-color-green {
+    .note-background(#89ce6c, #c4f697, #9fd787, #71c44e);
+}
+
+.x-note-color-pink {
+    .note-background(#d693c9, #f697e3, #e0aed6, #c972b8);
+}
+
+.x-note-color-orange {
+    .note-background(#efa957, #efa957, #f2ba78, #ec9531);
+}
+
+.x-note-color-blue {
+    .note-background(#7ca6d9, #97d3f6, #99b9e1, #5a8fcf)
+}
+
+.x-note-color-white {
+    .note-background(#fafafa, #dbdbdb, #fbfbfb, #f9f9f9);
+}

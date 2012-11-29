@@ -1,0 +1,55 @@
+.shadow(@size, @opacity: 1) {
+    box-shadow:0 0 @size rgba(0, 0, 0, @opacity);
+
+    -o-box-shadow: 0 0 @size rgba(0, 0, 0, @opacity);
+    -webkit-box-shadow: 0 0 @size rgba(0, 0, 0, @opacity);
+    -moz-box-shadow: 0 0 @size rgba(0, 0, 0, @opacity);
+}
+
+.rotate(@deg) {
+	transform: rotate(@deg);
+
+	-o-transform:rotate(@deg);
+    -webkit-transform:rotate(@deg);
+    -moz-transform:rotate(@deg);
+}
+
+.gradient(@from, @to, @stop) {
+	background: -webkit-gradient(linear, 0%, 0%, 0% 100%, from(@from), to(@to), color-stop(.6, @stop));
+}
+
+.padding(@top: 0px, @bottom: 0px, @left: 0px, @right: 0px) {
+    padding-top: @top;
+    padding-bottom: @bottom;
+    padding-left: @left;
+    padding-right: @right;
+}
+
+.margin(@top: 0px, @bottom: 0px, @left: 0px, @right: 0px) {
+    margin-top: @top;
+    margin-bottom: @bottom;
+    margin-left: @left;
+    margin-right: @right;
+}
+
+.pointer() {
+	cursor: pointer;
+}
+
+.font(@family, @serif: sans-serif, @size: 12px) {
+	font-family: @family, @serif;
+	font-size: @size;
+}
+
+.round-corners(@radius) {
+    border-radius: @radius;
+}
+
+.radial-gradient(@start, @end, @dest:farthest-corner, @origin:center) {
+    background-image: -webkit-radial-gradient(@origin, @dest, @start, @end);
+    background-image: -moz-radial-gradient(@origin, @dest, @start, @end);
+    background-image: -o-radial-gradient(@origin, @dest, @start, @end);
+    background-image: -ms-radial-gradient(@origin, @dest, @start, @end);
+
+    background-image: radial-gradient(@origin, @dest, @start, @end);
+}

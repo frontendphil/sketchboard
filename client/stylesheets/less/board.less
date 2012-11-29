@@ -1,0 +1,39 @@
+@import "utils";
+@import "const";
+
+@page-width: 100%;
+@page-height: 100%;
+
+html, body {
+	.margin(0px, 0px, 0px, 0px);
+
+	width: @page-width;
+	height: @page-height;
+}
+
+.x-canvas-background {
+    width: @page-width;
+    height: @page-height;
+
+    background-image: url('@{image-path}/corkboard.jpg');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: 0% 0%;
+}
+
+.x-sketchboard-logo {
+    position: fixed;
+
+    left: 40px;
+    top: 0px;
+
+    width: 230px;
+    height: 50px;
+
+    background-color: @background-color-fallback;
+    background-image: url('@{image-path}/sketchboard-headline-small.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+
+    .shadow(24px, .56);
+}

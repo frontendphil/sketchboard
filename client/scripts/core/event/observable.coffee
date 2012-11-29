@@ -1,18 +1,22 @@
 class Observable
+
     constructor: ->
         @listeners = {};
+        @events = []
 
-    observe: (name, callback) ->
-        if(!name in @listeners)
+    on: (name, callback) ->
+        if name not in @events
+            return
+
+        if name not in @listeners
             @listeners[name] = []
 
         @listeners[name].push callback
 
-    fire: (name) ->
-        args = arguments.slice 1
-        that = this
+    raise: (name) ->
+        args = $(arguments).slice 1
 
-        callback.apply that, args for callback in @listeners[name] if @listeners[name]
+        callback.apply @, args for callback in @listeners[name] if @listeners[name]
 
-    removeListener: (name, callback) ->
+    un: (name, callback) ->
         @listeners[name].pop callback if @listeners[name]

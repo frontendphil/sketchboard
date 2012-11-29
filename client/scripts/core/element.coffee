@@ -1,22 +1,32 @@
 class Element
 
     constructor: (@attr = {}) ->
-        this.create()
+        @create()
 
     create: ->
         if(@attr.renderTo)
             @dom = $(@attr.renderTo)
         else
-            @dom = jQuery('<div/>', class: @attr.cls or '')
+            @dom = jQuery('<div/>')
 
-        this.applyStyles(@dom, @attr.styles or {})
+        @dom.addClass @attr.cls or ''
+
+        @applyStyles(@dom, @attr.styles or {})
 
         for item in @attr.items or []
-            do(item) ->
-                if (item instanceof Element or item instanceof jQuery)
-                    this.insert(item)
-                else 
-                    this.insert(new Element(item))
+            if (item instanceof Element or item instanceof jQuery)
+                @insert item
+            else
+                @insert new Element(item)
+
+    on: (name, clb) ->
+        @dom.on name, clb
+
+    un: (name, clb) ->
+        @dom.unbind name, clb
+
+    raise: (name) ->
+        @dom.trigger name
 
     applyStyles: (element, styles) ->
         collectedStyle = []
@@ -24,13 +34,13 @@ class Element
         for key, value of styles
             collectedStyle.push key + ": " + value
 
-        element.writeAttribute("style", collectedStyle.join ";")
+            element.attr("style", collectedStyle.join ";")
 
     addClass: (cls) ->
-        @dom.addClassName cls
+        @dom.addClass cls
 
     insert: (el) ->
-        if el.dom then @dom.insert(el.dom) else @dom.insert(el)
+        if el.dom then @dom.append(el.dom) else @dom.append(el)
 
     moveTo: (coord) ->
         style =
@@ -38,3 +48,15 @@ class Element
             'margin-top': coord.y + 'px'
 
         @dom.css style
+
+    getWidth: ->
+        @dom.outerWidth()
+
+    getHeight: ->
+        @dom.outerHeight()
+
+    hide: ->
+        @dom.hide()
+
+    show: ->
+        @dom.show()

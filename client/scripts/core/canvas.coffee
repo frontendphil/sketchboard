@@ -1,19 +1,23 @@
-class Canvas extends Observable
+class Canvas extends AbstractElement
 
     constructor: ->
         super
-
-        @el = new Element({
             renderTo: '.canvas'
-        })
-
-        that = @
+            cls: "x-canvas-background"
 
         facade = new Facade
-        facade.registerEntryPoint("getCanvas", () -> that)
+        facade.registerEntryPoint("getCanvas", => @)
 
-    setUp: ->
-        @el.addClass "x-canvas-background"
+        note = new Note facade,
+            heading: "New Note",
+            content: "My first note"
 
-    add: (child) ->
-        @el.insert child.el
+        note.moveTo
+            x: 300,
+            y: 300
+
+        @add note
+
+        noteMenu = new NoteMenu facade
+        @add noteMenu
+
