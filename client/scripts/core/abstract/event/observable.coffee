@@ -14,7 +14,7 @@ class Observable
         @listeners[name].push callback
 
     raise: (name) ->
-        args = $(arguments).slice 1
+        args = ($ arguments).slice 1
 
         callback.apply @, args for callback in @listeners[name] if @listeners[name]
 

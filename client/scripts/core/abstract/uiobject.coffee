@@ -1,6 +1,6 @@
 class UIObject extends Observable
 
-    DOMEvents: ["mouseover", "mouseout", "click"]
+    DOMEvents: ["mouseover", "mouseout", "click", "mousedown", "mouseup", "mousemove"]
 
     constructor: ->
         super
@@ -17,13 +17,16 @@ class UIObject extends Observable
 
         @raise "render", @
 
+    draggable: (opts) ->
+        @el.draggable opts
+
     on: (name, clb) ->
         if name in @DOMEvents
             @el.on(name, clb)
 
             return
 
-        super name, clb
+        super
 
     un: (name, clb) ->
         if name in @DOMEvents
@@ -34,11 +37,16 @@ class UIObject extends Observable
         args = ($ arguments).slice 1
 
         if name in @DOMEvents
-            @el.raise name
+            @el.raise.apply @el, [name].concat args
 
             return
 
         super
+
+    update: ->
+        @position =
+            x: @el.left()
+            y: @el.top()
 
     add: (child) ->
         @el.insert child.el
@@ -82,4 +90,6 @@ class UIObject extends Observable
 
         for e in events
             @on e, ->
-                origin.raise e
+                args = $ arguments
+
+                origin.raise.apply origin, [e].concat args

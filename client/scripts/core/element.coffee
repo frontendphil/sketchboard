@@ -19,6 +19,14 @@ class Element
             else
                 @insert new Element(item)
 
+    draggable: (opts = {}) ->
+        @dom.draggable
+            stop: opts.stop
+            start: opts.start
+            drag: opts.drag
+
+        @dom.css "position", "absolute"
+
     on: (name, clb) ->
         @dom.on name, clb
 
@@ -44,8 +52,8 @@ class Element
 
     moveTo: (coord) ->
         style =
-            'margin-left': coord.x + 'px'
-            'margin-top': coord.y + 'px'
+            'left': coord.x + 'px'
+            'top': coord.y + 'px'
 
         @dom.css style
 
@@ -63,3 +71,12 @@ class Element
 
     rotate: (deg) ->
         return
+
+    isTarget: (element) ->
+        @dom == element
+
+    top: ->
+        parseInt (@dom.css "top").replace "px", ""
+
+    left: ->
+        parseInt (@dom.css "left").replace "px", ""

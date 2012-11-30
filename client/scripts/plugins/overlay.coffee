@@ -6,7 +6,9 @@ class Overlay extends UIObject
 
         super width, height
 
-        @move attrs.padding
+        @padding = attrs.padding
+
+        @move()
 
         @initEvents attrs
         @initMenu attrs.menu
@@ -21,14 +23,14 @@ class Overlay extends UIObject
         @slave.on "move", =>
             @move attrs.padding
 
-        @proxy @slave, "click"
+        @proxy @slave, "click", "mousedown", "mouseup"
 
-    move: (padding = 0) ->
+    move: ->
         position = @slave.getPosition()
 
         @moveTo
-            x: position.x - padding/2
-            y: position.y - padding/2
+            x: position.x - @padding/2
+            y: position.y - @padding/2
 
     create: (width, height) ->
         super

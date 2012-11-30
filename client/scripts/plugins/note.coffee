@@ -10,11 +10,42 @@ class Note extends UIObject
 
     initEvents: ->
         if not @attr.thumbnail
-            @on "click", =>
-                @move()
+            @draggable
+                start: =>
+                    @dragging = true
+                    @overlay.hide()
+                stop: =>
+                    @dragging = false
+
+                    @update()
+                    @overlay.move()
+                    @overlay.show()
 
             @on "mouseover", =>
                 @showMenu()
+
+            @facade.getCanvas().on "mouseup", =>
+                @handleMouseUp()
+
+            @on "mouseup", =>
+                @handleMouseUp()
+
+            @on "mousedown", =>
+                @handleMouseDown()
+
+    handleMouseDown: ->
+        @clicking = yes
+
+        window.setTimeout =>
+            @clicking = no
+        , 200
+
+    handleMouseUp: ->
+        if @clicking
+            @handleClick
+
+    handleClick: ->
+        console.log "click"
 
     move: ->
         @moveTo
@@ -58,6 +89,9 @@ class Note extends UIObject
         @el.rotate deg
 
     showMenu: ->
+        if @dragging
+            return
+
         if not @overlay
             @overlay = new Overlay @facade, @,
                 padding: 40
