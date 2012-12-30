@@ -55,3 +55,16 @@
 
     background-image: radial-gradient(@origin, @dest, @start, @end);
 }
+
+.left-arrow(@size, @color) {
+    position: absolute;
+
+    top: 50% - @size;
+    left: -@size;
+
+    content: "";
+
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-right: @size solid @color;
+}

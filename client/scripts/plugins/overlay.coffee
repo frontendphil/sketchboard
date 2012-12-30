@@ -8,7 +8,7 @@ class Overlay extends UIObject
 
         @padding = attrs.padding
 
-        @move()
+        @layout()
 
         @initEvents attrs
         @initMenu attrs.menu
@@ -23,14 +23,20 @@ class Overlay extends UIObject
         @slave.on "move", =>
             @move attrs.padding
 
-        @proxy @slave, "click", "mousedown", "mouseup"
+        # proyying disabled as overlay is actually shown behind_ the element
+        # @proxy @slave, "click", "mousedown", "mouseup"
+
+    layout: ->
+        @move()
+
+        # TODO: somewhat handle rotation of slave element
 
     move: ->
         position = @slave.getPosition()
 
         @moveTo
-            x: position.x - @padding/2
-            y: position.y - @padding/2
+            x: position.x - @padding / 2
+            y: position.y - @padding / 2
 
     create: (width, height) ->
         super

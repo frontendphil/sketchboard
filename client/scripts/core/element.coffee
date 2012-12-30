@@ -69,8 +69,39 @@ class Element
     show: ->
         @dom.show()
 
-    rotate: (deg) ->
-        return
+    rotate: (deg, duration=0) ->
+        if duration
+            start = @rotation || 0
+            end = deg
+
+            frameLength = (1 / 25) * 1000
+
+            delta = end - start
+            stepSize = delta / (frameLength * duration)
+
+            animFn = =>
+                if delta > 0 && start >= end || delta < 0 && end >= start
+                    window.clearInterval animFn
+
+                    return
+
+                start += stepSize
+
+                @dom.css {
+                    "-webkit-transform": "rotate(" + start + "deg)"
+                }
+
+            window.setInterval animFn, frameLength
+
+            @rotation = deg
+
+            return
+
+        @rotation = deg
+
+        @dom.css {
+            "-webkit-transform": "rotate(" + deg + "deg)"
+        }
 
     isTarget: (element) ->
         @dom == element

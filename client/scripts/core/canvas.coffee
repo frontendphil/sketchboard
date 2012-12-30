@@ -12,6 +12,8 @@ class Canvas extends UIObject
             heading: "New Note",
             content: "My first note"
 
+        note.rotate 15
+
         note.moveTo
             x: 300,
             y: 300

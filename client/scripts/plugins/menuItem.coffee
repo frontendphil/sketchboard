@@ -13,4 +13,7 @@ class MenuItem extends UIObject
 
         super attrs
 
+        if attrs["click"]
+            @on "click", attrs["click"]
+
 

@@ -1,0 +1,21 @@
+@import "utils";
+@import "const";
+
+.x-property-editor {
+    position: absolute;
+
+    top: 0px;
+
+    width: 500px;
+    height: 500px;
+
+    background-color: white;
+    background-image: url("@{image-path}/linedpaper.png");
+
+    .shadow(20px, .3);
+    .round-corners(10px);
+
+    &:before {
+        .left-arrow(25px, #fff);
+    }
+}

@@ -13,13 +13,10 @@ class Note extends UIObject
             @draggable
                 start: =>
                     @dragging = true
-                    @overlay.hide()
                 stop: =>
                     @dragging = false
 
                     @update()
-                    @overlay.move()
-                    @overlay.show()
 
             @on "mouseover", =>
                 @showMenu()
@@ -33,6 +30,9 @@ class Note extends UIObject
             @on "mousedown", =>
                 @handleMouseDown()
 
+            @on "mouseout", =>
+                @menu.hide()
+
     handleMouseDown: ->
         @clicking = yes
 
@@ -45,7 +45,7 @@ class Note extends UIObject
             @handleClick
 
     handleClick: ->
-        console.log "click"
+        return
 
     move: ->
         @moveTo
@@ -83,25 +83,47 @@ class Note extends UIObject
         return "x-note-color-" + color
 
     showInfo: ->
-        return
+        if @editor
+            if not @editor.hidden
+                @editor.hide()
 
-    rotate: (deg) ->
-        @el.rotate deg
+                @rotate @oldRotation, .2
+
+                return
+            else
+                @editor.show()
+
+        if not @editor
+            @editor = new PropertyEditor @, {}
+
+            @editor.moveTo
+                x: @getWidth() + 30
+                y: -(@getHeight() / 2)
+
+            @add @editor
+
+
+        @oldRotation = @rotation
+        @rotate 0, .2
+
+    rotate: (deg, duration=0) ->
+        @rotation = deg
+
+        @el.rotate deg, duration
 
     showMenu: ->
         if @dragging
             return
 
-        if not @overlay
-            @overlay = new Overlay @facade, @,
-                padding: 40
-                menu:
-                    items: [
-                        icon: "edit",
-                        click: =>
-                            @showInfo
-                    ]
+        if not @menu
+            @menu = new Menu
+                items: [
+                    icon: "edit",
+                    click: =>
+                        @showInfo()
+                ]
 
+            @add @menu
 
-        @overlay.show()
+        @menu.show()
 

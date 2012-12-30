@@ -77,11 +77,13 @@ class UIObject extends Observable
     show: ->
         @el.show()
 
+        @hidden = no
         @raise "show", @
 
     hide: ->
         @el.hide()
 
+        @hidden = yes
         @raise "hide", @
 
     proxy: ->
