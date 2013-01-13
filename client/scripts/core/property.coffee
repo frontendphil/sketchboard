@@ -10,12 +10,15 @@ class Property extends Observable
 
         @set @attr.value
 
+        @originalValue = @value
+
         @changed = no
 
     set: (value) ->
-        if value is @value
+        if not value? or value is @value
             return
 
+        @originalValue = @value
         @value = value
 
         @refreshDom value
@@ -54,7 +57,12 @@ class Property extends Observable
         return group
 
     discard: ->
-        delete @input
+        @set @originalValue
+
+        if @input?
+            @input.val @originalValue
 
     save: ->
         @set @input.val()
+
+        @originalValue = @get()
