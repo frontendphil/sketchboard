@@ -54,10 +54,21 @@ class Note extends UIObject
 
     create: ->
         head = $ "<h1/>"
-        head.html @attr.heading
+
+        @properties.add new Property "note-heading",
+            name: "Headline",
+            type: "text",
+            value: @attr.heading,
+            ref: head
 
         text = $ "<p/>"
-        text.html @attr.content
+
+        @properties.add new Property "note-content",
+            name: "Content",
+            type: "text",
+            multiline: yes,
+            value: @attr.content
+            ref: text
 
         super @getConf head, text
 
@@ -82,29 +93,36 @@ class Note extends UIObject
 
         return "x-note-color-" + color
 
+    straighten: ->
+        @oldRotation = @rotation
+
+        @rotate 0, .2
+
+    restoreRotation: ->
+        if @oldRotation
+            @rotate @oldRotation, .2
+
     showInfo: ->
         if @editor
-            if not @editor.hidden
-                @editor.hide()
+            @straighten()
+            @editor.layout()
+            @editor.show "fade"
 
-                @rotate @oldRotation, .2
+            return
 
-                return
-            else
-                @editor.show()
+        @editor = new PropertyEditor @
 
-        if not @editor
-            @editor = new PropertyEditor @, {}
+        @add @editor
 
-            @editor.moveTo
-                x: @getWidth() + 30
-                y: -(@getHeight() / 2)
+        @editor.layout()
 
-            @add @editor
+        @editor.on "cancel", =>
+            @restoreRotation()
 
+        @editor.on "save", =>
+            @restoreRotation()
 
-        @oldRotation = @rotation
-        @rotate 0, .2
+        @straighten()
 
     rotate: (deg, duration=0) ->
         @rotation = deg

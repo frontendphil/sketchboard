@@ -1,15 +1,20 @@
 class UIObject extends Observable
 
-    DOMEvents: ["mouseover", "mouseout", "click", "mousedown", "mouseup", "mousemove"]
+    DOMEvents: ["mouseover", "mouseout", "click", "mousedown", "mouseup", "mousemove", "submit"]
 
     constructor: ->
         super
 
         @events.push "move", "add", "remove", "show", "hide", "render"
+        @properties = new PropertySet
 
         @create.apply @, arguments
 
     create: (conf) ->
+        if conf.buttons?
+            conf.items = conf.items or []
+            conf.items.push new ButtonBar conf.buttons
+
         @el = new Element conf
         @position =
             x: 0

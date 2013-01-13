@@ -16,6 +16,8 @@ class Element
         for item in @attr.items or []
             if (item instanceof Element or item instanceof jQuery)
                 @insert item
+            else if item instanceof UIObject
+                @insert item.el
             else
                 @insert new Element(item)
 

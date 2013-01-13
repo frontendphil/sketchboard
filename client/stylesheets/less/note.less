@@ -4,6 +4,8 @@
 @note-thumb-width: 100px;
 @note-thumb-height: 100px;
 
+@note-initial-width: 200px;
+
 .x-note-wrap {
     position: absolute;
 
@@ -35,6 +37,8 @@
             h1 {
                 .padding(50px, 0px, 30px, 30px);
 
+                max-width: @note-initial-width;
+
                 font-size:48px;
                 line-height:48px;
                 letter-spacing:-5px;
@@ -60,7 +64,8 @@
             }
 
             p {
-                min-width: 170px;
+                min-width: @note-initial-width - 30;
+                max-width: @note-initial-width;
 
                 .padding(0px, 50px, 30px, 30px);
 
