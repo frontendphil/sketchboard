@@ -1,9 +1,12 @@
 class PropertyEditor extends UIObject
 
-    constructor: (@owner) ->
+    constructor: (@owner, @facade) ->
         super
 
         @events.push "cancel", "save"
+
+        @facade.getCanvas().on "note.added", =>
+            @form.discard()
 
     create: ->
         conf =

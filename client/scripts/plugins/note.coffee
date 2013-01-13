@@ -110,9 +110,10 @@ class Note extends UIObject
 
             return
 
-        @editor = new PropertyEditor @
+        @editor = new PropertyEditor @, @facade
 
         @add @editor
+        @editor.hide()
 
         @editor.layout()
 
@@ -123,6 +124,8 @@ class Note extends UIObject
             @restoreRotation()
 
         @straighten()
+
+        @editor.show "fade"
 
     rotate: (deg, duration=0) ->
         @rotation = deg

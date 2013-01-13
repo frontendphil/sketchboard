@@ -65,11 +65,11 @@ class Element
     getHeight: ->
         @dom.outerHeight()
 
-    hide: ->
-        @dom.hide()
+    hide: (effect) ->
+        @dom.hide(effect)
 
-    show: ->
-        @dom.show()
+    show: (effect) ->
+        @dom.show(effect)
 
     rotate: (deg, duration=0) ->
         if duration

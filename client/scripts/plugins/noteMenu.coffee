@@ -55,7 +55,7 @@ class NoteMenu extends UIObject
         note = new Note @facade,
             color: color
             heading: "New Note"
-            content: "Your notes go here"
+            content: "Your notes go here."
 
         canvas = @facade.getCanvas()
 

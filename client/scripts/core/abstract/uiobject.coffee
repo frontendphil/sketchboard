@@ -79,14 +79,14 @@ class UIObject extends Observable
     getPosition: ->
         @position
 
-    show: ->
-        @el.show()
+    show: (effect) ->
+        @el.show(effect)
 
         @hidden = no
         @raise "show", @
 
-    hide: ->
-        @el.hide()
+    hide: (effect) ->
+        @el.hide(effect)
 
         @hidden = yes
         @raise "hide", @

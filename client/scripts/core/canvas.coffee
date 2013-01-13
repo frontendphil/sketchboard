@@ -23,3 +23,9 @@ class Canvas extends UIObject
         noteMenu = new NoteMenu facade
         @add noteMenu
 
+        @events.push "note.added"
+
+    add: ->
+        super
+
+        @raise "note.added"
