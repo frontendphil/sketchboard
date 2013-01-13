@@ -103,6 +103,9 @@ class Note extends UIObject
             @rotate @oldRotation, .2
 
     showInfo: ->
+        if @editor and @editor.visible()
+            return
+
         if @editor
             @straighten()
             @editor.layout()
@@ -139,9 +142,30 @@ class Note extends UIObject
         if not @menu
             @menu = new Menu
                 items: [
-                    icon: "edit",
-                    click: =>
-                        @showInfo()
+                        icon: "edit",
+                        hint: "Opens an editor to change the note's content.",
+                        click: =>
+                            @showInfo()
+                    ,
+                        icon: "remove",
+                        hint: "Removes this note from the board.",
+                        click: =>
+                            dialog = new Dialog @facade,
+                                message: "Are you sure, you want to remove this note?",
+                                buttons: [
+                                        text: "Cancel",
+                                        default: true,
+                                        click: ->
+                                            dialog.close()
+                                    ,
+                                        text: "Remove",
+                                        click: =>
+                                            @remove()
+
+                                            dialog.close()
+                                ]
+
+                            dialog.show()
                 ]
 
             @add @menu

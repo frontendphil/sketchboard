@@ -9,7 +9,9 @@ class MenuItem extends UIObject
         i = $ "<i/>",
             class: "icon-" + attrs.icon
 
-        attrs.items = [i]
+        $.extend attrs,
+            title: attrs.hint,
+            items: [i]
 
         super attrs
 

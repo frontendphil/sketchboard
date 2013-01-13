@@ -1,0 +1,26 @@
+@import "const";
+@import "utils";
+
+.x-dialog-wrapper {
+    position: absolute;
+
+    margin: auto;
+
+    background-image: @paper-background;
+
+    .shadow(20px, .5);
+    .round-corners(10px);
+
+    .x-dialog {
+        position: relative;
+
+        &:before {
+            .tape();
+        }
+
+        .x-dialog-body {
+            padding: 20px;
+            padding-top: 40px;
+        }
+    }
+}

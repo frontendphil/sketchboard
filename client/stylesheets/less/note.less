@@ -15,11 +15,15 @@
         .shadow(5px, .2);
 
         &:before {
-            .note-shadow(-3deg);
+            .paper-shadow(-3deg);
+
+            left: 10px;
         }
 
         &:after {
-            .note-shadow(3deg);
+            .paper-shadow(3deg);
+
+            right: 10px;
         }
 
         .x-note-body {
@@ -44,22 +48,7 @@
                 letter-spacing:-5px;
 
                 &:before {
-                    width:50%;
-                    height:40px;
-
-                    content:'';
-
-                    display:block;
-                    position:absolute;
-
-                    top:-20px;
-                    left:25%;
-
-                    background-color:rgba(255,255,255,.25);
-                    opacity:1;
-
-                    .rotate(-5deg);
-                    .shadow(2px, .15);
+                    .tape();
                 }
             }
 
@@ -115,29 +104,6 @@
             }
         }
     }
-}
-
-
-// This adds the tape to the note
-.note-shadow(@rotation) {
-    width:90%;
-    height:20%;
-
-    content:'';
-
-    display:block;
-    position:absolute;
-
-    right:10px;
-    bottom:3px;
-
-    background-color:rgba(0,0,0,.5);
-
-    .rotate(@rotation);
-    .shadow(10px);
-
-    opacity:1;
-    z-index:1;
 }
 
 .note-background(@bg, @text, @gradient, @stop) {

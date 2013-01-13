@@ -29,3 +29,14 @@ class Canvas extends UIObject
         super
 
         @raise "note.added"
+
+    mask: ->
+        @overlay = new Mask()
+
+        @add @overlay
+
+    unmask: ->
+        if not @overlay
+            return
+
+        @overlay.remove()

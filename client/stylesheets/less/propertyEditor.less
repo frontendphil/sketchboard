@@ -1,13 +1,8 @@
 @import "utils";
 @import "const";
 
-.x-property-editor {
+.x-property-editor-wrap {
     position: absolute;
-
-    top: 0px;
-
-    background-color: white;
-    background-image: url("@{image-path}/linedpaper.png");
 
     .shadow(20px, .3);
     .round-corners(10px);
@@ -16,27 +11,55 @@
         .left-arrow(25px, #fff, 50px);
     }
 
-    .x-property-editor-body {
-        margin: 20px;
+    .x-property-editor {
+        position: relative;
 
-        form {
-            input, textarea {
-                width: 280px;
-            }
+        &:before {
+            .paper-shadow(-3deg);
 
-            label {
-                &:after {
-                    content: ":";
+            left: 10px;
+        }
+
+        &:after {
+            .paper-shadow(3deg);
+
+            right: 10px;
+        }
+
+        .x-property-editor-body-wrap {
+            z-index: 2;
+
+            position: relative;
+
+            background-image: @paper-background;
+            padding-top: 20px;
+
+            .round-corners(10px);
+
+            .x-property-editor-body {
+                margin: 20px;
+                margin-top: 0px;
+
+                form {
+                    input, textarea {
+                        width: 280px;
+                    }
+
+                    label {
+                        &:after {
+                            content: ":";
+                        }
+
+                        width: 120px;
+
+                        font-family: @note-font, serif;
+                        font-size: 25pt;
+                    }
+
+                    .controls {
+                        margin-left: 140px;
+                    }
                 }
-
-                width: 120px;
-
-                font-family: "Reenie Beanie", serif;
-                font-size: 25pt;
-            }
-
-            .controls {
-                margin-left: 140px;
             }
         }
     }

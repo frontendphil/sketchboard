@@ -11,7 +11,19 @@ class Element
 
         @dom.addClass @attr.cls or ''
 
-        @applyStyles(@dom, @attr.styles or {})
+        if @attr.buttons?
+            @attr.items = @attr.items or []
+            @attr.items.push new ButtonBar @attr.buttons
+
+        if @attr.renderHidden
+            $.extend @attr.styles,
+                display: "none"
+
+
+        @applyStyles(@dom, @attr.styles)
+
+        if @attr.title
+            @dom.attr "title", @attr.title
 
         for item in @attr.items or []
             if (item instanceof Element or item instanceof jQuery)
@@ -39,12 +51,15 @@ class Element
         @dom.trigger name
 
     applyStyles: (element, styles) ->
+        if not styles
+            return
+
         collectedStyle = []
 
         for key, value of styles
             collectedStyle.push key + ": " + value
 
-            element.attr("style", collectedStyle.join ";")
+        element.attr "style", collectedStyle.join ";"
 
     addClass: (cls) ->
         @dom.addClass cls
@@ -53,6 +68,14 @@ class Element
         if el.dom then @dom.append(el.dom) else @dom.append(el)
 
     moveTo: (coord) ->
+        if coord is "center"
+            @dom.position
+                my: "center",
+                at: "center",
+                of: @dom.parent()
+
+            return
+
         style =
             'left': coord.x + 'px'
             'top': coord.y + 'px'
@@ -70,6 +93,12 @@ class Element
 
     show: (effect) ->
         @dom.show(effect)
+
+    visible: ->
+        @dom.is(":visible")
+
+    remove: ->
+        @dom.remove()
 
     rotate: (deg, duration=0) ->
         if duration

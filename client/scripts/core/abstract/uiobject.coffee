@@ -6,15 +6,11 @@ class UIObject extends Observable
         super
 
         @events.push "move", "add", "remove", "show", "hide", "render"
-        @properties = new PropertySet
+        @properties = new PropertySet()
 
         @create.apply @, arguments
 
     create: (conf) ->
-        if conf.buttons?
-            conf.items = conf.items or []
-            conf.items.push new ButtonBar conf.buttons
-
         @el = new Element conf
         @position =
             x: 0
@@ -84,6 +80,9 @@ class UIObject extends Observable
 
         @hidden = no
         @raise "show", @
+
+    visible: ->
+        @el.visible()
 
     hide: (effect) ->
         @el.hide(effect)

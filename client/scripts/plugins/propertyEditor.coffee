@@ -10,21 +10,26 @@ class PropertyEditor extends UIObject
 
     create: ->
         conf =
-            cls: "x-property-editor"
+            cls: "x-property-editor-wrap"
             items: [
-                cls: "x-property-editor-body",
-                items: [@getForm()]
-            ]
-            buttons: [
-                    text: "Cancel",
-                    click: =>
-                        @form.discard()
-                ,
-                    text: "Save",
-                    click: =>
-                        @form.save()
-
-                    default: true
+                cls: "x-property-editor",
+                items: [
+                    cls: "x-property-editor-body-wrap",
+                    items: [
+                        cls: "x-property-editor-body",
+                        items: [@getForm()]
+                    ],
+                    buttons: [
+                            text: "Cancel",
+                            click: =>
+                                @form.discard()
+                        ,
+                            text: "Save",
+                            click: =>
+                                @form.save()
+                            default: true
+                    ]
+                ]
             ]
 
         super conf
