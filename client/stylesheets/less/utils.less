@@ -56,10 +56,10 @@
     background-image: radial-gradient(@origin, @dest, @start, @end);
 }
 
-.left-arrow(@size, @color) {
+.left-arrow(@size, @color, @top: 50%) {
     position: absolute;
 
-    top: 50% - @size;
+    top: @top;
     left: -@size;
 
     content: "";
