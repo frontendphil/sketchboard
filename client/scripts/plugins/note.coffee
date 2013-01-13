@@ -130,11 +130,6 @@ class Note extends UIObject
 
         @editor.show "fade"
 
-    rotate: (deg, duration=0) ->
-        @rotation = deg
-
-        @el.rotate deg, duration
-
     showMenu: ->
         if @dragging
             return

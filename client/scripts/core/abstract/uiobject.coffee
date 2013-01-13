@@ -72,6 +72,11 @@ class UIObject extends Observable
 
         @raise "move", @, coord
 
+    rotate: (deg, duration=0) ->
+        @rotation = deg
+
+        @el.rotate deg, duration
+
     getPosition: ->
         @position
 

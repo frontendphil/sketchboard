@@ -1,5 +1,7 @@
 class Element
 
+    BROWSER_PREFIXES = ["-moz-", "-webkit-", "-ms-", "-o-", ""]
+
     constructor: (@attr = {}) ->
         @create()
 
@@ -100,6 +102,14 @@ class Element
     remove: ->
         @dom.remove()
 
+    getCrossBrowserProperty: (name, value) ->
+        property = {}
+
+        $.each BROWSER_PREFIXES, ->
+            property[@ + name] = value
+
+        return property
+
     rotate: (deg, duration=0) ->
         if duration
             start = @rotation || 0
@@ -118,9 +128,7 @@ class Element
 
                 start += stepSize
 
-                @dom.css {
-                    "-webkit-transform": "rotate(" + start + "deg)"
-                }
+                @dom.css @getCrossBrowserProperty "transform", "rotate(" + start + "deg)"
 
             window.setInterval animFn, frameLength
 
@@ -130,9 +138,7 @@ class Element
 
         @rotation = deg
 
-        @dom.css {
-            "-webkit-transform": "rotate(" + deg + "deg)"
-        }
+        @dom.css @getCrossBrowserProperty "transform", "rotate(" + deg + "deg)"
 
     isTarget: (element) ->
         @dom == element
